@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,8 +16,10 @@ public class Ticket {
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private MovieSession movieSession;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ShoppingCart shoppingCart;
 
     public Long getId() {
         return id;
@@ -48,5 +49,13 @@ public class Ticket {
     public String toString() {
         return "id=" + id
                 + ", user=" + user;
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
+    }
+
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 }
